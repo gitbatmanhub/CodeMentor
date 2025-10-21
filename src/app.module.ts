@@ -12,11 +12,13 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
+import { GeminiModule } from './gemini/gemini.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
+    GeminiModule,
+    /*TypeOrmModule.forRoot({
       ssl: process.env.STAGE === 'prod',
       extra:
         process.env.STAGE === 'prod'
@@ -30,22 +32,22 @@ import { join } from 'path';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-    }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    }),*/
+    /*GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-    }),
-    ProductsModule,
-    CommonModule,
-    SeedModule,
-    FilesModule,
+    }),*/
+    // ProductsModule,
+    // CommonModule,
+    // SeedModule,
+    // FilesModule,
     /*ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
     }),*/
-    AuthModule,
-    MessagesWsModule,
+    // AuthModule,
+    // MessagesWsModule,
   ],
 })
 export class AppModule {}

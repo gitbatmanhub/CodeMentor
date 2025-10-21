@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.12.1",
+    "@google/genai": "^1.25.0",
     "@nestjs/apollo": "^13.1.0",
     "@nestjs/common": "^11.1.0",
     "@nestjs/config": "^4.0.2",
