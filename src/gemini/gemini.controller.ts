@@ -16,14 +16,4 @@ export class GeminiController {
   async returnHello() {
     return await this.geminiService.GetHello();
   }
-
-  @Get('colorOjosLiccy')
-  async getLiccyDataOjos() {
-    return await this.geminiService.getColorOjosLiccy();
-  }
-
-  @Get('colorPielLiccy')
-  async getLiccyDataPiel() {
-    return await this.geminiService.getColorPielLiccy();
-  }
 }

@@ -13,11 +13,16 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { GeminiModule } from './gemini/gemini.module';
+import { MongodbModule } from './mongodb/mongodb.module';
+import { ConversationModule } from './conversation/conversation.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     GeminiModule,
+    ConfigModule,
+    MongodbModule,
+    ConversationModule,
     /*TypeOrmModule.forRoot({
       ssl: process.env.STAGE === 'prod',
       extra:

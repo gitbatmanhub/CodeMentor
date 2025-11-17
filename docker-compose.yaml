@@ -1,3 +1,6 @@
+version: '3.8'
+
+
 services:
   db:
     image: postgres:17.4
@@ -11,3 +14,21 @@ services:
     container_name: shopTest
     volumes:
       - ./postgres:/var/lib/postgresql/data
+
+
+  mongodb:
+    image: mongo:latest  # Usamos la imagen oficial de MongoDB
+    container_name: mi_mongodb
+    restart: always
+    ports:
+      - "27017:27017"    # Mapea el puerto del contenedor al puerto local
+    environment:
+      # Opcional, pero recomendado para producción
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      # Esto asegura que los datos persistan incluso si el contenedor se detiene o elimina
+      - mongo_data:/data/db
+
+volumes:
+    mongo_data:
