@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_NAME: ${DB_NAMEDB}
       POSTGRES_USERNAME: ${DB_USERNAME}
-    container_name: shopTest
+    container_name: codementor
     volumes:
       - ./postgres:/var/lib/postgresql/data
 

@@ -5,17 +5,16 @@ export const ConversationSchema = new mongoose.Schema({
   iaMessage: String,
 });
 
-export const usuarioSchema = new mongoose.Schema({
-  _id: String,
+export const ConversationMain = new mongoose.Schema({
   userId: String,
   title: String,
   createdAt: String,
   updatedAt: String,
   messages: [
     {
-      role: String,
-      content: String,
-      timestamp: String,
+      usuarioMessage: String,
+      iaMessage: String,
+      createdAt: String,
     },
   ],
 });

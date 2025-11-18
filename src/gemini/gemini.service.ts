@@ -1,12 +1,13 @@
 import * as process from 'node:process';
 
-import { Inject, Injectable } from '@nestjs/common';
-import { GoogleGenAI, Chat } from '@google/genai';
+import { Injectable } from '@nestjs/common';
+import { Chat, GoogleGenAI } from '@google/genai';
 
-import { ConversationTableDto, DataConversation } from './dto/conversation.dto';
 import { ConversationService } from '../conversation/conversation.service';
-import { ConversationInterface } from '../conversation/interface/conversation.interface';
 import { CreateConversationDto } from '../conversation/dto/create-conversation.dto';
+import { ConversationMainInterface } from '../conversation/interface/conversationMain.interface';
+import { CreateConversationMainDto } from '../conversation/dto/create-conversation-main.dto';
+import { MessageDto } from './dto/message.dto';
 // import { Model } from 'mongoose';
 // import { usuarioSchema } from '../conversation/entities/conversation.schema';
 
@@ -45,37 +46,26 @@ export class GeminiService {
   //Metodos: getColoCabello(), getColorOjos()
 
   // Metodo para manejar la conversacion
-  async getResponse(message: string): Promise<ConversationInterface> {
+  async getResponse(body: MessageDto): Promise<any> {
     try {
+      const { message, idConversation } = body;
       // Usar 'sendMessage' automáticamente mantiene  enyvía el historial
       const response = await this.chat.sendMessage({
         message: message,
       });
 
-      console.log(response.text);
+      const conversation = new CreateConversationDto(
+        message,
+        response.text,
+        idConversation ? idConversation : null,
+      );
 
-      const conversation = new CreateConversationDto(message, response.text);
+      console.log('La conversacion: ' + conversation);
 
-      const conversationEntity =
-        await this.conversationService.createConversation(conversation!);
-
-      /*const conversatio = new ;
-      const dataConversation = new DataConversation();
-
-      dataConversation.mesage = message;
-      dataConversation.iaResponse = response.text;
-      conversatio.Item = dataConversation;*/
-
-      // await this.documentClient.send(new PutCommand(conversatio));
-
-      return conversationEntity;
+      return await this.conversationService.createConversation(conversation!);
     } catch (error) {
       console.error('Error al comunicarse con Gemini:', error);
       throw new Error('Lo siento, el servicio de IA no está disponible.');
     }
-  }
-
-  async GetHello(): Promise<string> {
-    return 'Hola Liccy from gemini';
   }
 }

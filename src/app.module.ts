@@ -15,6 +15,9 @@ import { join } from 'path';
 import { GeminiModule } from './gemini/gemini.module';
 import { MongodbModule } from './mongodb/mongodb.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { QuestionaryModule } from './questionary/questionary.module';
+import { QuestionaryModule } from './questionary/questionary.module';
 
 @Module({
   imports: [
@@ -23,12 +26,12 @@ import { ConversationModule } from './conversation/conversation.module';
     ConfigModule,
     MongodbModule,
     ConversationModule,
-    /*TypeOrmModule.forRoot({
-      ssl: process.env.STAGE === 'prod',
+    TypeOrmModule.forRoot({
+      /*ssl: process.env.STAGE === 'prod',
       extra:
         process.env.STAGE === 'prod'
           ? { ssl: { rejectUnauthorized: false } }
-          : undefined,
+          : undefined,*/
       type: 'postgres',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
@@ -37,7 +40,7 @@ import { ConversationModule } from './conversation/conversation.module';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-    }),*/
+    }),
     /*GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
@@ -48,9 +51,10 @@ import { ConversationModule } from './conversation/conversation.module';
     // CommonModule,
     // SeedModule,
     // FilesModule,
-    /*ServeStaticModule.forRoot({
+    ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
-    }),*/
+    }),
+    QuestionaryModule,
     // AuthModule,
     // MessagesWsModule,
   ],

@@ -39,14 +39,6 @@ export class SeedService {
   private async seedServiceRunSeed(user: User) {
     await this.productService.removeAllProducts();
 
-    const products = initialData.products;
-
-    const insertPromisses = [];
-    for (const product of products) {
-      insertPromisses.push(await this.productService.create(product, user));
-    }
-    await Promise.all(insertPromisses);
-
     return true;
   }
 }

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { GeminiService } from './gemini.service';
 import { MessageDto } from './dto/message.dto';
+import { ConversationInterface } from '../conversation/interface/conversation.interface';
 
 @Controller('gemini')
 export class GeminiController {
@@ -8,12 +9,13 @@ export class GeminiController {
 
   @Post('chat')
   async chat(@Body() body: MessageDto) {
-    const response = await this.geminiService.getResponse(body.message);
+    console.log(body);
+    const response = await this.geminiService.getResponse(body);
     return { response };
   }
 
-  @Get()
-  async returnHello() {
+  /*@Get()
+  async getAllMessages(): Promise<ConversationInterface[]> {
     return await this.geminiService.GetHello();
-  }
+  }*/
 }
