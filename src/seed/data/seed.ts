@@ -7,6 +7,7 @@ interface SeedData {
   users: SeedUser[];
 
   questions: QuestionItem[];
+  unidades: Unidades[];
 
   // products: SeedProduct[];
 }
@@ -27,6 +28,19 @@ interface SeedUser {
   fullName: string;
   password: string;
   role: string[];
+}
+
+interface temas {
+  descripcion: string;
+  duracionHoras: number;
+  instructores: string;
+  nivelDificultad: 'Básico' | 'Intermedio' | 'Avanzado';
+}
+
+interface Unidades {
+  descripcion: string;
+  duracionHoras: number;
+  temas: temas[];
 }
 
 export const initialData: SeedData = {
@@ -341,6 +355,274 @@ export const initialData: SeedData = {
           option_text: 'Combinación libre de formatos.',
           score: 4,
           profile_hint: 'autonomo',
+        },
+      ],
+    },
+  ],
+
+  unidades: [
+    {
+      descripcion: 'Tipos básicos de datos en TypeScript',
+      duracionHoras: 6,
+      temas: [
+        {
+          descripcion: 'Trabajando con variables',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Básico',
+        },
+        {
+          descripcion: 'Tipo Object',
+          duracionHoras: 0.5,
+          instructores: 'ia',
+          nivelDificultad: 'Básico',
+        },
+        {
+          descripcion: 'Arrays',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Básico',
+        },
+        {
+          descripcion: 'Tuplas',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Tipo Any y Enums',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Union y Literal Types',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Sentencias y control de flujo',
+      duracionHoras: 5,
+      temas: [
+        {
+          descripcion: 'If, else y operador ternario',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Básico',
+        },
+        {
+          descripcion: 'Switch',
+          duracionHoras: 0.5,
+          instructores: 'ia',
+          nivelDificultad: 'Básico',
+        },
+        {
+          descripcion: 'Bucle for',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Bucle while y do while',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Ejercicio práctico de ciclos',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Funciones en TypeScript',
+      duracionHoras: 6,
+      temas: [
+        {
+          descripcion: 'Funciones anónimas',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Funciones que retornan error (tipo never)',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Funciones como tipos',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Funciones callback',
+          duracionHoras: 2,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Clases e interfaces',
+      duracionHoras: 6,
+      temas: [
+        {
+          descripcion: 'Clases en TypeScript',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Interfaces',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Types e interfaces',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Ejercicio práctico de clases e interfaces',
+          duracionHoras: 2,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'This, private, public y readonly',
+      duracionHoras: 4,
+      temas: [
+        {
+          descripcion: 'Palabra reservada this',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Modificadores private y public',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Propiedad readonly',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Herencia en programación orientada a objetos',
+      duracionHoras: 7,
+      temas: [
+        {
+          descripcion: 'Conceptos básicos de herencia',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Sobrescritura de métodos',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Palabra reservada protected',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Getters y setters',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Ejemplo completo de herencia',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Clases abstractas e interfaces avanzadas',
+      duracionHoras: 6,
+      temas: [
+        {
+          descripcion: 'Clases abstractas',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Métodos estáticos',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Interfaces y clases abstractas',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Ejemplos teóricos y prácticos',
+          duracionHoras: 2,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+      ],
+    },
+
+    {
+      descripcion: 'Manejo de errores y debugging',
+      duracionHoras: 5,
+      temas: [
+        {
+          descripcion: 'Try, catch y finally',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Tipos de errores',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
+        },
+        {
+          descripcion: 'Enlazar y depurar TypeScript',
+          duracionHoras: 1.5,
+          instructores: 'ia',
+          nivelDificultad: 'Avanzado',
+        },
+        {
+          descripcion: 'Ejemplo práctico de manejo de errores',
+          duracionHoras: 1,
+          instructores: 'ia',
+          nivelDificultad: 'Intermedio',
         },
       ],
     },
