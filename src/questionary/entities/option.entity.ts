@@ -4,13 +4,19 @@ import { QuestionEntity } from './question.entity';
 @Entity('option')
 export class OptionEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  idOption: number;
 
   @Column('text')
-  text: string;
+  option_label: string;
+
+  @Column('text')
+  option_text: string;
 
   @Column()
-  value: number;
+  score: number;
+
+  @Column('text')
+  profile_hint: string;
 
   @ManyToOne(() => QuestionEntity, (question) => question.options, {
     onDelete: 'CASCADE',

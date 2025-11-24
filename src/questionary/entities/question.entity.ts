@@ -4,10 +4,10 @@ import { OptionEntity } from './option.entity';
 @Entity('question')
 export class QuestionEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  idQuestion: number;
 
   @Column('text')
-  text: string;
+  question_text: string;
 
   @OneToMany(() => OptionEntity, (option) => option.question, { cascade: true })
   options: OptionEntity[];
