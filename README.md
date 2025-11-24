@@ -75,7 +75,7 @@ Visitar ```localhost:3000/api```
    3. Interfaces y clases abstractas
    4. Ejemplos
 8. Manejor de errores
-    1. Try Catch finally
+    1. Try Catch finally    
    2. Tipos de errores
    3. Enlazar - depurar typescript
    4. Try catch ejemplo
