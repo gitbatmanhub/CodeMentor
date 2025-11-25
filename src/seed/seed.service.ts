@@ -6,6 +6,7 @@ import { User } from '../auth/entities/user.entity';
 import { Repository } from 'typeorm';
 import { QuestionaryService } from '../questionary/questionary.service';
 import { TemarioService } from '../temario/temario.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class SeedService {
@@ -14,6 +15,7 @@ export class SeedService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly questionaryService: QuestionaryService,
+    private readonly authService: AuthService,
     private readonly temarioService: TemarioService,
   ) {}
 
@@ -26,6 +28,7 @@ export class SeedService {
   private async insertAllIntables() {
     await this.questionaryService.createSeed();
     await this.temarioService.createSeed();
+    await this.authService.insertUsersFromSeed();
   }
 
   private async deleteAllTables() {
