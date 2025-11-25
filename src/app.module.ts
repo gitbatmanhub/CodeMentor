@@ -17,7 +17,7 @@ import { MongodbModule } from './mongodb/mongodb.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { QuestionaryModule } from './questionary/questionary.module';
-import { QuestionaryModule } from './questionary/questionary.module';
+import { TemarioModule } from './temario/temario.module';
 
 @Module({
   imports: [
@@ -49,12 +49,13 @@ import { QuestionaryModule } from './questionary/questionary.module';
     }),*/
     // ProductsModule,
     // CommonModule,
-    // SeedModule,
+    SeedModule,
     // FilesModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
     }),
     QuestionaryModule,
+    TemarioModule,
     // AuthModule,
     // MessagesWsModule,
   ],

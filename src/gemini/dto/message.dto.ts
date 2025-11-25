@@ -4,7 +4,10 @@ export class MessageDto {
   @IsString()
   message: string;
 
+  @IsString()
+  userId: string;
+
   @IsOptional()
   @IsString()
-  idConversation: string;
+  idConversationMain: string;
 }

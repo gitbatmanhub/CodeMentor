@@ -3,11 +3,9 @@ import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
 import { Model } from 'mongoose';
 import { ConversationInterface } from './interface/conversation.interface';
-import {
-  ConversationMainInterface,
-  messageInterface,
-} from './interface/conversationMain.interface';
+import { ConversationMainInterface } from './interface/conversationMain.interface';
 import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
+
 // import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
 
 @Injectable()
@@ -23,20 +21,15 @@ export class ConversationService {
     return 'This action adds a new conversation';
   }
 
-  async createConversation(createConversationDto: CreateConversationDto) {
-    const { idConversation, usuarioMessage, iaMessage } = createConversationDto;
-    console.log(createConversationDto);
+  async createConversation(createConversationDto: CreateConversationMainDto) {
+    const { userId, title, mode } = createConversationDto;
 
     try {
-      let conversationMain: ConversationMainInterface;
+      // let conversationMain: ConversationMainInterface;
 
       // Si no viene id → crear nueva conversación principal
-      if (!idConversation) {
-        conversationMain = await this.createConversationMain({
-          userId: '23897643786589263745623789456',
-          title: 'Logaritmos en js',
-        });
-      } else {
+
+      /* } else {
         // Buscar la conversationMain existente
         conversationMain = await this.findOneConversationMain(idConversation);
 
@@ -45,9 +38,9 @@ export class ConversationService {
             `No existe una conversación con id ${idConversation}`,
           );
         }
-      }
+      }*/
 
-      const messages: {
+      /*const messages: {
         usuarioMessage: string;
         iaMessage: string;
         createdAt: Date;
@@ -69,15 +62,46 @@ export class ConversationService {
           },
           { new: true },
         )
-        .exec();
+        .exec();*/
 
-      return updatedConversation;
+      return await this.createConversationMain({
+        userId: userId, // TODO: cambiar por userId real
+        title: title, // TODO: cambiar por título real,
+        mode: mode,
+      });
     } catch (error) {
       console.error(error);
       throw new NotFoundException(
         'Error mientras se guardaban los datos de la conversación',
       );
     }
+  }
+
+  async updateConversationMain(
+    idConversation: string,
+    updateConversationDto: UpdateConversationDto,
+  ) {
+    const { usuarioMessage, iaMessage } = updateConversationDto;
+    const messages: {
+      usuarioMessage: string;
+      iaMessage: string;
+      createdAt: Date;
+    } = {
+      usuarioMessage: usuarioMessage,
+      iaMessage: iaMessage,
+      createdAt: new Date(),
+    };
+    await this.conversationMainModel
+      .findByIdAndUpdate(
+        idConversation,
+        {
+          $push: {
+            messages: messages,
+          },
+        },
+        { new: true },
+      )
+      .exec();
   }
 
   async findAll() {
@@ -93,20 +117,19 @@ export class ConversationService {
     // return;
   }
 
-  findOneConversationMain(id: string) {
+  findOneConversationMain(id: string): Promise<ConversationMainInterface> {
     return this.conversationMainModel.findById(id);
-    // return;
   }
 
   async createConversationMain(
     createConversationDto: CreateConversationMainDto,
   ) {
-    const { userId, title } = createConversationDto;
+    const { userId, title, mode } = createConversationDto;
 
-    const conversationMain = new CreateConversationDto(userId, title, null);
     const conversation = await this.conversationMainModel.create({
       userId,
       title,
+      mode,
     });
 
     return await conversation.save(conversation[0]);

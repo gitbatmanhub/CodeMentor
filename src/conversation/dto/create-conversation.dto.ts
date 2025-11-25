@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class CreateConversationDto {
   @IsString()
@@ -7,17 +7,12 @@ export class CreateConversationDto {
   @IsString()
   iaMessage: string;
 
-  @IsOptional()
   @IsString()
-  idConversation: string;
+  mode: string;
 
-  constructor(
-    usuarioMessage: string,
-    iaMessage: string,
-    idConversation: string | null,
-  ) {
+  constructor(usuarioMessage: string, iaMessage: string, mode: string) {
     this.usuarioMessage = usuarioMessage;
     this.iaMessage = iaMessage;
-    this.idConversation = idConversation || null;
+    this.mode = mode;
   }
 }

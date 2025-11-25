@@ -30,5 +30,6 @@ export class SeedService {
 
   private async deleteAllTables() {
     await this.questionaryService.deleteAll();
+    await this.temarioService.deleteAll();
   }
 }

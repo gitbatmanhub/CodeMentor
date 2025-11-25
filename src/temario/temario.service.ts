@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateTemarioDto } from './dto/create-temario.dto';
 import { UpdateTemarioDto } from './dto/update-temario.dto';
 import { initialData } from '../seed/data/seed';
@@ -25,7 +25,6 @@ export class TemarioService {
     const unidadesSeed = initialData.unidades;
 
     for (const u of unidadesSeed) {
-      console.log(u.descripcion);
       const unidadEntity = new UnidadEntity();
       unidadEntity.description = u.descripcion;
       unidadEntity.duracionHoras = u.duracionHoras;
@@ -43,8 +42,25 @@ export class TemarioService {
     }
   }
 
+  async deleteAll() {
+    const queryBuilder = this.unidadRepository.createQueryBuilder('unidad');
+    try {
+      return await queryBuilder.delete().where({}).execute();
+    } catch (e) {
+      return this.handlerDbException(e);
+    }
+  }
+  private handlerDbException(error: any) {
+    if (error.code === '23505') {
+      console.error(`Error: ${error.message}`);
+      throw new InternalServerErrorException(error.detail);
+    }
+    console.error(`Error: ${error.message}`);
+    throw new InternalServerErrorException(error.message);
+  }
+
   async findAll() {
-    return await this.unidadRepository.find();
+    return await this.unidadRepository.find({ relations: { temas: true } });
   }
 
   findOne(id: number) {
@@ -57,5 +73,17 @@ export class TemarioService {
 
   remove(id: number) {
     return `This action removes a #${id} temario`;
+  }
+
+  async findTemaById(id: number) {
+    return await this.temaRepository.findOne({
+      where: { idTema: id },
+    });
+  }
+
+  async findUnidadById(id: number) {
+    return await this.unidadRepository.findOne({
+      where: { idUnidad: id },
+    });
   }
 }
