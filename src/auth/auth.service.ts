@@ -11,6 +11,7 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './interfaces';
+import { initialData } from '../seed/data/seed';
 
 @Injectable()
 export class AuthService {
@@ -56,6 +57,16 @@ export class AuthService {
     } catch (error) {
       this.handleDbError(error);
     }
+  }
+
+  async insertUsersFromSeed() {
+    const seedUsers = initialData.users;
+    const users: User[] = [];
+    seedUsers.forEach((user) => {
+      users.push(this.userRepository.create(user));
+    });
+    await this.userRepository.save(users);
+    return users[0];
   }
 
   checkAuthStatus(user: User) {

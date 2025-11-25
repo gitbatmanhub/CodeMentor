@@ -30,6 +30,6 @@ import { AuthResolver } from './auth.resolver';
       },
     }),
   ],
-  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule],
+  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule, AuthService],
 })
 export class AuthModule {}
