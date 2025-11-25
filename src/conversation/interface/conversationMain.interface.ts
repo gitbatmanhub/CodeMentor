@@ -4,6 +4,7 @@ export interface ConversationMainInterface extends Document {
   userId: string;
   title: string;
   mode: string;
+  // idConversartionIA: string;
   createdAt: string;
   updatedAt: string;
   messages: [messageInterface];

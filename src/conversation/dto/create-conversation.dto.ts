@@ -7,12 +7,8 @@ export class CreateConversationDto {
   @IsString()
   iaMessage: string;
 
-  @IsString()
-  mode: string;
-
-  constructor(usuarioMessage: string, iaMessage: string, mode: string) {
+  constructor(usuarioMessage: string, iaMessage: string) {
     this.usuarioMessage = usuarioMessage;
     this.iaMessage = iaMessage;
-    this.mode = mode;
   }
 }

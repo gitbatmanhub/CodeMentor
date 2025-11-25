@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { ConversationInterface } from './interface/conversation.interface';
 import { ConversationMainInterface } from './interface/conversationMain.interface';
 import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
+import { ConversationMain } from './entities/conversation.schema';
 
 // import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
 
@@ -26,9 +27,7 @@ export class ConversationService {
 
     try {
       // let conversationMain: ConversationMainInterface;
-
       // Si no viene id → crear nueva conversación principal
-
       /* } else {
         // Buscar la conversationMain existente
         conversationMain = await this.findOneConversationMain(idConversation);
@@ -39,7 +38,6 @@ export class ConversationService {
           );
         }
       }*/
-
       /*const messages: {
         usuarioMessage: string;
         iaMessage: string;
@@ -63,12 +61,11 @@ export class ConversationService {
           { new: true },
         )
         .exec();*/
-
-      return await this.createConversationMain({
+      /*return await this.createConversationMain({
         userId: userId, // TODO: cambiar por userId real
         title: title, // TODO: cambiar por título real,
         mode: mode,
-      });
+      });*/
     } catch (error) {
       console.error(error);
       throw new NotFoundException(
@@ -118,19 +115,24 @@ export class ConversationService {
   }
 
   findOneConversationMain(id: string): Promise<ConversationMainInterface> {
-    return this.conversationMainModel.findById(id);
+    const conversation = this.conversationMainModel.findById(id);
+    if (!conversation) {
+      throw new NotFoundException(`Conversation with id ${id} not found`);
+    }
+    return conversation;
   }
 
   async createConversationMain(
     createConversationDto: CreateConversationMainDto,
-  ) {
+  ): Promise<ConversationMainInterface> {
     const { userId, title, mode } = createConversationDto;
 
-    const conversation = await this.conversationMainModel.create({
-      userId,
-      title,
-      mode,
-    });
+    const conversation: ConversationMainInterface =
+      await this.conversationMainModel.create({
+        userId,
+        title,
+        mode,
+      });
 
     return await conversation.save(conversation[0]);
   }
