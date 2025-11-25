@@ -12,6 +12,8 @@ export class UnidadEntity {
   @Column()
   duracionHoras: number;
 
-  @OneToMany(() => TemaEntity, (tema) => tema.unidad, { cascade: true })
+  @OneToMany(() => TemaEntity, (tema) => tema.unidad, {
+    cascade: true,
+  })
   temas: TemaEntity[];
 }

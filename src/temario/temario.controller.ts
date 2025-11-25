@@ -1,16 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { TemarioService } from './temario.service';
-import { CreateTemarioDto } from './dto/create-temario.dto';
-import { UpdateTemarioDto } from './dto/update-temario.dto';
 
 @Controller('temario')
 export class TemarioController {

@@ -21,6 +21,7 @@ export class TemaEntity {
 
   @ManyToOne(() => UnidadEntity, (unidad) => unidad.temas, {
     onDelete: 'CASCADE',
+    eager: true,
   })
   unidad: QuestionEntity;
 }

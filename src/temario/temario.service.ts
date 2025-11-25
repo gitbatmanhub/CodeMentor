@@ -65,9 +65,14 @@ export class TemarioService {
     let temas: TemaEntity[] | TemaEntity = [];
 
     if (idTema) {
-      temas = await this.temaRepository.findBy({ idTema });
+      temas = await this.temaRepository.findOne({
+        where: { idTema: idTema },
+        relations: ['unidad'],
+      });
     } else {
-      temas = await this.temaRepository.find();
+      temas = await this.temaRepository.find({
+        relations: ['unidad'],
+      });
     }
 
     return temas;
@@ -78,14 +83,15 @@ export class TemarioService {
   ): Promise<UnidadEntity[] | UnidadEntity> {
     let unidades: UnidadEntity[] | UnidadEntity = [];
 
-    console.log(idUnidad);
-
     if (idUnidad) {
       unidades = await this.unidadRepository.findOne({
         where: { idUnidad: idUnidad },
+        relations: ['temas'],
       });
     } else {
-      unidades = await this.unidadRepository.find();
+      unidades = await this.unidadRepository.find({
+        relations: ['temas'],
+      });
     }
 
     return unidades;
