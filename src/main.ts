@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as process from 'node:process';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,10 @@ async function bootstrap() {
       forbidNonWhitelisted: false,
     }),
   );
+  app.enableCors({
+    origin: [`${process.env.ORIGIN_URL_FRONT}`],
+    credentials: true,
+  });
   const config = new DocumentBuilder()
     .setTitle('Shop Test')
     .setDescription('Enpoints for testing about nest')
