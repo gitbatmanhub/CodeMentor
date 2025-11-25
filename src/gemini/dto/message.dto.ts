@@ -1,4 +1,5 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { ConversationType } from '../../conversation/entities/conversation.schema';
 
 export class MessageDto {
   @IsString()
@@ -10,4 +11,12 @@ export class MessageDto {
   @IsOptional()
   @IsString()
   idConversationMain: string;
+
+  @IsOptional()
+  @IsString()
+  temaConversation: string;
+
+  @IsOptional()
+  @IsEnum(ConversationType)
+  mode: ConversationType = ConversationType.Libre;
 }

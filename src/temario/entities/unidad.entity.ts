@@ -3,8 +3,8 @@ import { TemaEntity } from './tema.entity';
 
 @Entity('unidad')
 export class UnidadEntity {
-  @PrimaryGeneratedColumn()
-  idUnidad: number;
+  @PrimaryGeneratedColumn('uuid')
+  idUnidad: string;
 
   @Column()
   description: string;

@@ -4,8 +4,8 @@ import { UnidadEntity } from './unidad.entity';
 
 @Entity('tema')
 export class TemaEntity {
-  @PrimaryGeneratedColumn()
-  idTema: number;
+  @PrimaryGeneratedColumn('uuid')
+  idTema: string;
 
   @Column()
   descripcion: string;

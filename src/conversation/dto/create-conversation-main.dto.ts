@@ -1,13 +1,15 @@
+import { ConversationType } from '../entities/conversation.schema';
+
 export class CreateConversationMainDto {
   userId: string;
   title: string;
-  mode: string;
+  mode: ConversationType;
   // idConversartionIA: string;
 
   constructor(
     userId: string,
     title: string,
-    mode: string,
+    mode: ConversationType,
     // idConversartionIA: string,
   ) {
     this.userId = userId;

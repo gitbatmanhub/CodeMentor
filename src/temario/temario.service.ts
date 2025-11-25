@@ -59,8 +59,36 @@ export class TemarioService {
     throw new InternalServerErrorException(error.message);
   }
 
-  async findAll() {
-    return await this.unidadRepository.find({ relations: { temas: true } });
+  async findAllTemas(
+    idTema: string | null,
+  ): Promise<TemaEntity[] | TemaEntity> {
+    let temas: TemaEntity[] | TemaEntity = [];
+
+    if (idTema) {
+      temas = await this.temaRepository.findBy({ idTema });
+    } else {
+      temas = await this.temaRepository.find();
+    }
+
+    return temas;
+  }
+
+  async findAllUnidades(
+    idUnidad: string | null,
+  ): Promise<UnidadEntity[] | UnidadEntity> {
+    let unidades: UnidadEntity[] | UnidadEntity = [];
+
+    console.log(idUnidad);
+
+    if (idUnidad) {
+      unidades = await this.unidadRepository.findOne({
+        where: { idUnidad: idUnidad },
+      });
+    } else {
+      unidades = await this.unidadRepository.find();
+    }
+
+    return unidades;
   }
 
   findOne(id: number) {
@@ -75,13 +103,13 @@ export class TemarioService {
     return `This action removes a #${id} temario`;
   }
 
-  async findTemaById(id: number) {
+  async findTemaById(id: string) {
     return await this.temaRepository.findOne({
       where: { idTema: id },
     });
   }
 
-  async findUnidadById(id: number) {
+  async findUnidadById(id: string) {
     return await this.unidadRepository.findOne({
       where: { idUnidad: id },
     });

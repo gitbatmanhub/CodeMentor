@@ -50,8 +50,8 @@ export class GeminiService {
   // Metodo para manejar la conversacion
   async getResponse(body: MessageDto): Promise<any> {
     try {
-      const { message, userId, idConversationMain } = body;
-      console.log('Mensaje recibido en GeminiService:', message);
+      const { message, userId, idConversationMain, temaConversation, mode } =
+        body;
       let chat: any;
       let history: any = [];
       let conversationMain: any = [];
@@ -67,8 +67,8 @@ export class GeminiService {
       } else {
         const conversation = new CreateConversationMainDto(
           'kbdsfkjhkdsjf',
-          'Example title',
-          'Libre',
+          temaConversation,
+          mode,
         );
         conversationMain = await this.newConversation(conversation);
         history = this.mapHistoryToGeminiFormat(conversationMain);
@@ -83,16 +83,16 @@ export class GeminiService {
         history: history,
       });
 
-      console.log();
-
       const response = await chat.sendMessage({ message });
 
       const messageSave = new CreateConversationDto(message, response.text);
 
-      return this.conversationService.updateConversationMain(
+      await this.conversationService.updateConversationMain(
         conversationMain.id,
         messageSave,
       );
+
+      return response.text;
     } catch (error) {
       console.error('Error al comunicarse con Gemini:', error);
       throw new Error('Lo siento, el servicio de IA no está disponible.');
@@ -110,14 +110,9 @@ export class GeminiService {
       },
     });
 
-    const conversation = new CreateConversationMainDto(
-      createConversation.userId,
-      createConversation.title,
-      createConversation.mode,
-    );
     // eslint-disable-next-line prefer-const
     conversationMain =
-      await this.conversationService.createConversationMain(conversation);
+      await this.conversationService.createConversationMain(createConversation);
     return conversationMain;
   }
 
