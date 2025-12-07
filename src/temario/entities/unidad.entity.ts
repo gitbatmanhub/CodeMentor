@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { TemaEntity } from './tema.entity';
+import { UnidadUsuarioEntity } from './unidad-usuario.entity';
 
 @Entity('unidad')
 export class UnidadEntity {
@@ -16,4 +17,11 @@ export class UnidadEntity {
     cascade: true,
   })
   temas: TemaEntity[];
+
+  @OneToMany(
+    () => UnidadUsuarioEntity,
+    (unidadUsuario) => unidadUsuario.idUnidad,
+    { cascade: true },
+  )
+  unidadUsuario: UnidadUsuarioEntity;
 }

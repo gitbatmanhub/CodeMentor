@@ -10,6 +10,7 @@ import { Product } from '../../products/entities';
 import { ApiProperty } from '@nestjs/swagger';
 import { ObjectType } from '@nestjs/graphql';
 import { Exclude } from 'class-transformer';
+import { UnidadUsuarioEntity } from '../../temario/entities/unidad-usuario.entity';
 
 @Entity({ name: 'users' })
 @ObjectType()
@@ -67,6 +68,12 @@ export class User {
 
   @OneToMany(() => Product, (product) => product.user)
   product: Product;
+
+  @OneToMany(
+    () => UnidadUsuarioEntity,
+    (unidadUsuario) => unidadUsuario.idUsuario,
+  )
+  unidadUsuario: UnidadUsuarioEntity;
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);

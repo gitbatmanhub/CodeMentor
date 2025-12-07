@@ -1,6 +1,14 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { QuestionEntity } from '../../questionary/entities/question.entity';
 import { UnidadEntity } from './unidad.entity';
+import { Product } from '../../products/entities';
+import { UnidadUsuarioTemaEntity } from './unidad-usuario-tema.entity';
 
 @Entity('tema')
 export class TemaEntity {
@@ -24,4 +32,10 @@ export class TemaEntity {
     eager: true,
   })
   unidad: QuestionEntity;
+
+  @OneToMany(
+    () => UnidadUsuarioTemaEntity,
+    (unidadUsuarioTema) => unidadUsuarioTema.tema,
+  )
+  unidadUsuarioTema: UnidadUsuarioTemaEntity;
 }
