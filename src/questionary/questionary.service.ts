@@ -1,14 +1,14 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { QuestionEntity } from './entities/question.entity';
 import { Repository } from 'typeorm';
 import { OptionEntity } from './entities/option.entity';
 import { initialData } from '../seed/data/seed';
-import { ProductsService } from '../products/products.service';
+import { ResponsesQuestionaryDto } from './dto/response-questionary.dto';
+import { DataQuestionnaireDto } from '../gemini/dto/answer-question-encuesta.dto';
+import { GeminiService } from '../gemini/gemini.service';
+import { GeminiProfileService } from '../gemini/gemini.profile.service';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class QuestionaryService {
@@ -17,11 +17,9 @@ export class QuestionaryService {
     private readonly questionRepository: Repository<QuestionEntity>,
     @InjectRepository(OptionEntity)
     private readonly optionRepository: Repository<OptionEntity>,
+    private geminiService: GeminiService,
+    private geminiProfileService: GeminiProfileService,
   ) {}
-
-  create(createQuestionaryDto: any) {
-    return 'This action adds a new questionary';
-  }
 
   createSeed() {
     const questionsSeed = initialData.questions;
@@ -52,6 +50,36 @@ export class QuestionaryService {
     } catch (e) {
       return this.handlerDbException(e);
     }
+  }
+
+  async generateProfile(
+    user: User,
+    responsesQuestionaryDto: ResponsesQuestionaryDto,
+  ) {
+    const answers = [];
+
+    for (const item of responsesQuestionaryDto.answers) {
+      const question = await this.questionRepository.findOne({
+        where: { idQuestion: item.questionId },
+      });
+
+      const option = await this.optionRepository.findOne({
+        where: { idOption: item.selectedOptionId },
+      });
+
+      if (!question || !option) continue;
+
+      answers.push({
+        question: question.question_text,
+        answer: option.option_text,
+      });
+    }
+
+    const dataQuestionnaire: DataQuestionnaireDto = {
+      questionnaireData: answers,
+    };
+
+    return this.geminiProfileService.createPerfilAI(user.id, dataQuestionnaire);
   }
 
   private handlerDbException(error: any) {
