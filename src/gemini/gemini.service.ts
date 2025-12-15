@@ -1,17 +1,15 @@
 import * as process from 'node:process';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Chat, GoogleGenAI } from '@google/genai';
 
 import { ConversationService } from '../conversation/conversation.service';
 import { CreateConversationDto } from '../conversation/dto/create-conversation.dto';
-import { ConversationMainInterface } from '../conversation/interface/conversationMain.interface';
 import { CreateConversationMainDto } from '../conversation/dto/create-conversation-main.dto';
 import { MessageDto } from './dto/message.dto';
-import { b } from 'graphql-ws/dist/server-CRG3y31G';
-import { create } from 'node:domain';
-// import { Model } from 'mongoose';
-// import { usuarioSchema } from '../conversation/entities/conversation.schema';
+import { User } from '../auth/entities/user.entity';
+import { DataQuestionnaireDto } from './dto/answer-question-encuesta.dto';
+import { ProfileUserDto } from '../auth/dto/profile-user.dto';
 
 @Injectable()
 export class GeminiService {
@@ -48,10 +46,10 @@ export class GeminiService {
   //Metodos: getColoCabello(), getColorOjos()
 
   // Metodo para manejar la conversacion
-  async getResponse(body: MessageDto): Promise<any> {
+  async getResponse(body: MessageDto, user: User): Promise<any> {
     try {
-      const { message, userId, idConversationMain, temaConversation, mode } =
-        body;
+      const { message, idConversationMain, temaConversation, mode } = body;
+      const userId = user.id;
       let chat: any;
       let history: any = [];
       let conversationMain: any = [];
@@ -66,7 +64,7 @@ export class GeminiService {
         history = this.mapHistoryToGeminiFormat(conversationMain);
       } else {
         const conversation = new CreateConversationMainDto(
-          'kbdsfkjhkdsjf',
+          userId,
           temaConversation,
           mode,
         );
