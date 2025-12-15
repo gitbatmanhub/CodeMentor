@@ -66,6 +66,15 @@ export class User {
   @Column('text', { array: true, default: ['user'] })
   role: string[];
 
+  @ApiProperty({
+    example: ['false'],
+    uniqueItems: false,
+    description: 'ha sido encuestado?',
+    default: [false],
+  })
+  @Column('boolean', { default: false })
+  encuesta: boolean;
+
   @OneToMany(() => Product, (product) => product.user)
   product: Product;
 

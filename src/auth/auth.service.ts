@@ -48,6 +48,7 @@ export class AuthService {
           password: true,
           id: true,
           role: true,
+          encuesta: true,
         },
       });
 
@@ -80,8 +81,8 @@ export class AuthService {
   }
 
   async plainResponseUser(user: User, token: string) {
-    const { email, fullName } = user;
-    return new ResponseAuthDto(fullName, email, token);
+    const { email, fullName, encuesta } = user;
+    return new ResponseAuthDto(fullName, email, token, encuesta);
   }
 
   private handleDbError(error: any): never {
