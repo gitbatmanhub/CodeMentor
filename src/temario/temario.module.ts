@@ -6,6 +6,7 @@ import { UnidadEntity } from './entities/unidad.entity';
 import { TemaEntity } from './entities/tema.entity';
 import { UnidadUsuarioEntity } from './entities/unidad-usuario.entity';
 import { UnidadUsuarioTemaEntity } from './entities/unidad-usuario-tema.entity';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UnidadUsuarioTemaEntity } from './entities/unidad-usuario-tema.entity';
       UnidadUsuarioEntity,
       UnidadUsuarioTemaEntity,
     ]),
+    AuthModule,
   ],
   controllers: [TemarioController],
   providers: [TemarioService],

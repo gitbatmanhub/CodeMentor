@@ -1,6 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { TemarioService } from './temario.service';
+import { Auth } from '../auth/decorators';
 
+@Auth()
 @Controller('temario')
 export class TemarioController {
   constructor(private readonly temarioService: TemarioService) {}
