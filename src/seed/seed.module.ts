@@ -5,12 +5,11 @@ import { ProductsModule } from '../products/products.module';
 import { AuthModule } from '../auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { QuestionaryModule } from '../questionary/questionary.module';
-import { QuestionaryService } from '../questionary/questionary.service';
 import { TemarioModule } from '../temario/temario.module';
 
 @Module({
   controllers: [SeedController],
-  providers: [SeedService, QuestionaryService],
+  providers: [SeedService],
   imports: [
     ProductsModule,
     AuthModule,

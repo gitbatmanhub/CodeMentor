@@ -11,9 +11,6 @@ import { AuthService } from '../auth/auth.service';
 @Injectable()
 export class SeedService {
   constructor(
-    private readonly productService: ProductsService,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
     private readonly questionaryService: QuestionaryService,
     private readonly authService: AuthService,
     private readonly temarioService: TemarioService,
