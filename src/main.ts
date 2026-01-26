@@ -16,7 +16,7 @@ async function bootstrap() {
   );
   app.enableCors({
     origin: [`${process.env.ORIGIN_URL_FRONT}`],
-    credentials: true,
+    credentials: false,
   });
   const config = new DocumentBuilder()
     .setTitle('Shop Test')

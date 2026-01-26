@@ -66,6 +66,16 @@ export class AuthService {
     }
   }
 
+  async getUserData(id: string) {
+    return await this.userRepository.findOne({
+      where: { id },
+      select: {
+        fullName: true,
+        email: true,
+      },
+    });
+  }
+
   async insertUsersFromSeed() {
     const seedUsers = initialData.users;
     const users: User[] = [];
@@ -90,6 +100,10 @@ export class AuthService {
       throw new BadRequestException(error.detail);
     }
     throw new InternalServerErrorException(error.message);
+  }
+
+  updateEncuestaStatus(userId: string, status: boolean) {
+    return this.userRepository.update(userId, { encuesta: status });
   }
 
   private getJwtToken(payload: JwtPayload) {

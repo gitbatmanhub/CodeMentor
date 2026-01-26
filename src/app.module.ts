@@ -2,15 +2,7 @@ import * as process from 'node:process';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ProductsModule } from './products/products.module';
-import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
-import { FilesModule } from './files/files.module';
-import { AuthModule } from './auth/auth.module';
-import { MessagesWsModule } from './messages-ws/messages-ws.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { GeminiModule } from './gemini/gemini.module';
 import { MongodbModule } from './mongodb/mongodb.module';
@@ -18,6 +10,7 @@ import { ConversationModule } from './conversation/conversation.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { TemarioModule } from './temario/temario.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -56,6 +49,7 @@ import { TemarioModule } from './temario/temario.module';
     }),
     QuestionaryModule,
     TemarioModule,
+    ProfileModule,
     // AuthModule,
     // MessagesWsModule,
   ],

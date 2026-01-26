@@ -9,6 +9,6 @@ import { AuthModule } from '../auth/auth.module';
   controllers: [ProfileController],
   imports: [MongodbModule, AuthModule],
   providers: [ProfileService, ...ProfileProvider],
-  exports: [ProfileService],
+  exports: [ProfileService, MongodbModule, ...ProfileProvider],
 })
 export class ProfileModule {}

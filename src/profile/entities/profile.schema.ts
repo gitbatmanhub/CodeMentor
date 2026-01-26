@@ -18,7 +18,8 @@ export const AreasAdesarrollarSchema = new mongoose.Schema(
 
 export const RecomendacionesPersonalizadaSchema = new mongoose.Schema(
   {
-    recomendacion: { type: String, required: true },
+    nombre: { type: String, required: true },
+    descripcion: { type: String, required: true },
   },
   { _id: false },
 );

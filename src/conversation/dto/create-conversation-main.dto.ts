@@ -4,18 +4,18 @@ export class CreateConversationMainDto {
   userId: string;
   title: string;
   mode: ConversationType;
-  // idConversartionIA: string;
+  idTemaConversacion: string;
 
   constructor(
     userId: string,
     title: string,
     mode: ConversationType,
-    // idConversartionIA: string,
+    idTemaConversacion: string,
   ) {
     this.userId = userId;
     this.title = title;
     this.mode = mode;
-    // this.idConversartionIA = idConversartionIA;
+    this.idTemaConversacion = idTemaConversacion;
   }
 }
 

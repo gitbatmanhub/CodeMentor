@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
 // import { CreateConversationDto } from './dto/create-conversation.dto';
@@ -25,9 +26,12 @@ export class ConversationController {
     return this.conversationService.findAllConversaciones();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.conversationService.findOne(id);
+  @Get('user-tema')
+  findOne(
+    @Query('idTema') idTema: string,
+    @Query('idUsuario') idUsuario: string,
+  ) {
+    return this.conversationService.findOneConversationMain(idTema, idUsuario);
   }
 
   @Patch(':id')

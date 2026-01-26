@@ -16,5 +16,6 @@ export class AreasAdesarrollarDto {
 }
 
 export class RecomendacionesPersonalizadaDto {
-  recomendacion: string;
+  nombre: string;
+  descripcion: string;
 }

@@ -28,7 +28,6 @@ export class QuestionaryController {
     @Body() responsesQuestionaryDto: ResponsesQuestionaryDto,
     @GetUserREST() user: User,
   ) {
-    console.log(responsesQuestionaryDto);
     return this.questionaryService.generateProfile(
       user,
       responsesQuestionaryDto,

@@ -17,6 +17,7 @@ export class TemarioService {
     @InjectRepository(TemaEntity)
     private readonly temaRepository: Repository<TemaEntity>,
   ) {}
+
   create(createTemarioDto: CreateTemarioDto) {
     return 'This action adds a new temario';
   }

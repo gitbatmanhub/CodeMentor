@@ -6,6 +6,7 @@ import { ConversationInterface } from './interface/conversation.interface';
 import { ConversationMainInterface } from './interface/conversationMain.interface';
 import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
 import { ConversationMain } from './entities/conversation.schema';
+import { TemarioService } from '../temario/temario.service';
 
 // import { CreateConversationMainDto } from './dto/create-conversation-main.dto';
 
@@ -17,6 +18,8 @@ export class ConversationService {
 
     @Inject('ConversationMainModel')
     private conversationMainModel: Model<ConversationMainInterface>,
+
+    private temarioService: TemarioService,
   ) {}
   create(createConversationDto: CreateConversationDto) {
     return 'This action adds a new conversation';
@@ -114,10 +117,20 @@ export class ConversationService {
     // return;
   }
 
-  findOneConversationMain(id: string): Promise<ConversationMainInterface> {
-    const conversation = this.conversationMainModel.findById(id);
+  async findOneConversationMain(
+    idTemaConversacion: string,
+    idUsuario: string,
+  ): Promise<ConversationMainInterface> {
+    const conversation = this.conversationMainModel.findOne({
+      idTemaConversacion: idTemaConversacion,
+      userId: idUsuario,
+    });
+
+    const tema = await this.temarioService.findTemaById(idTemaConversacion);
     if (!conversation) {
-      throw new NotFoundException(`Conversation with id ${id} not found`);
+      throw new NotFoundException(
+        `Conversation with id ${idTemaConversacion} not found`,
+      );
     }
     return conversation;
   }
@@ -125,13 +138,14 @@ export class ConversationService {
   async createConversationMain(
     createConversationDto: CreateConversationMainDto,
   ): Promise<ConversationMainInterface> {
-    const { userId, title, mode } = createConversationDto;
+    const { userId, title, mode, idTemaConversacion } = createConversationDto;
 
     const conversation: ConversationMainInterface =
       await this.conversationMainModel.create({
         userId,
         title,
         mode,
+        idTemaConversacion,
       });
 
     return await conversation.save(conversation[0]);

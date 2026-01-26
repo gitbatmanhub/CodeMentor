@@ -7,11 +7,20 @@ import { ConversationModule } from '../conversation/conversation.module';
 import { GeminiProfileService } from './gemini.profile.service';
 import { ProfileModule } from '../profile/profile.module';
 import { AuthModule } from '../auth/auth.module';
+import { TemarioModule } from '../temario/temario.module';
+import { TemarioService } from '../temario/temario.service';
+import { TutorService } from './tutor.service';
 
 @Module({
   controllers: [GeminiController],
-  providers: [GeminiService, LiccyHuman, GeminiProfileService],
-  imports: [MongodbModule, AuthModule, ConversationModule, ProfileModule],
+  imports: [
+    MongodbModule,
+    AuthModule,
+    ConversationModule,
+    ProfileModule,
+    TemarioModule,
+  ],
+  providers: [GeminiService, LiccyHuman, GeminiProfileService, TutorService],
   exports: [GeminiService, GeminiProfileService, MongodbModule],
 })
 export class GeminiModule {}

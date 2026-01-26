@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { TemarioService } from './temario.service';
 import { Auth } from '../auth/decorators';
 
@@ -15,5 +15,11 @@ export class TemarioController {
   @Get('temas')
   findAllTemas(@Query('idTema') idTema: string) {
     return this.temarioService.findAllTemas(idTema);
+  }
+
+  @Get(':idTema')
+  findOne(@Param('idTema') idTema: string) {
+    console.log(idTema);
+    return this.temarioService.findTemaById(idTema);
   }
 }

@@ -9,10 +9,11 @@ export interface AreasAdesarrollarInterface {
 }
 
 export interface RecomendacionesPersonalizadaInterface {
-  recomendacion: string;
+  nombre: string;
+  descripcion: string;
 }
 
-export interface ProfileInterface extends Document {
+export interface ProfileInterface {
   userId: string;
 
   perfilDelJoven: string;
@@ -25,4 +26,9 @@ export interface ProfileInterface extends Document {
 
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ProfileCompleteInterface extends ProfileInterface {
+  nombreCompleto: string;
+  email: string;
 }

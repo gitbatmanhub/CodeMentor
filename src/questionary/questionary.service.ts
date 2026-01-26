@@ -9,6 +9,7 @@ import { DataQuestionnaireDto } from '../gemini/dto/answer-question-encuesta.dto
 import { GeminiService } from '../gemini/gemini.service';
 import { GeminiProfileService } from '../gemini/gemini.profile.service';
 import { User } from '../auth/entities/user.entity';
+import { ProfileService } from '../profile/profile.service';
 
 @Injectable()
 export class QuestionaryService {
@@ -19,6 +20,7 @@ export class QuestionaryService {
     private readonly optionRepository: Repository<OptionEntity>,
     private geminiService: GeminiService,
     private geminiProfileService: GeminiProfileService,
+    private profileService: ProfileService,
   ) {}
 
   createSeed() {

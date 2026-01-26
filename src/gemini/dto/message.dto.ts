@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ConversationType } from '../../conversation/entities/conversation.schema';
 
 export class MessageDto {
@@ -15,6 +15,10 @@ export class MessageDto {
   @IsOptional()
   @IsString()
   temaConversation: string;
+
+  @IsOptional()
+  @IsUUID()
+  idTemaConversacion: string;
 
   @IsOptional()
   @IsEnum(ConversationType)

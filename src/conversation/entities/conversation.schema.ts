@@ -13,7 +13,7 @@ export const ConversationSchema = new mongoose.Schema({
 export const ConversationMain = new mongoose.Schema({
   userId: { type: String, required: true },
   title: String,
-  // idConversartionIA: String,
+  idTemaConversacion: String,
 
   mode: {
     type: String,
