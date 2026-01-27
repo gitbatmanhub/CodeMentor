@@ -19,7 +19,6 @@ export class TemarioController {
 
   @Get(':idTema')
   findOne(@Param('idTema') idTema: string) {
-    console.log(idTema);
     return this.temarioService.findTemaById(idTema);
   }
 }

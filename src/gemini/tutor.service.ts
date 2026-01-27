@@ -45,10 +45,6 @@ Reglas:
     const { idTemaConversacion, idConversationMain } = body;
     const tema = await this.temarioService.findTemaById(idTemaConversacion);
 
-    if (idConversationMain) {
-      console.log('Tengo un id conversación main:', idConversationMain);
-    }
-
     const perfil = await this.profileService.findOne(user.id);
 
     const conversation = body.idConversationMain

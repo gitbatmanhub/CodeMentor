@@ -20,7 +20,8 @@ export class QuestionaryController {
 
   @Get()
   async getAllMessages(): Promise<QuestionEntity[]> {
-    return await this.questionaryService.findAll();
+    const questionary = await this.questionaryService.findAll();
+    return questionary;
   }
 
   @Post()

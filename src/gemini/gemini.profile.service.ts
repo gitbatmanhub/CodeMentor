@@ -31,7 +31,7 @@ export class GeminiProfileService {
   ): Promise<ProfileUserDto> {
     // const canUpdate = await this.profileService.canUpdateProfile(userId, 60);
     //TODO: Validar que cuando ya tenga un perfil no se pueda actualizar antes de 60 minutos
-    //TODO: Manejar error si no puede actualizar
+    //TODO: Manejar error sis no puede actualizar
 
     const systemPrompt = `
     Eres un Analista Educativo especializado en interpretar cuestionarios para crear perfiles descriptivos de estudiantes jóvenes.

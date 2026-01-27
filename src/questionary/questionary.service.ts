@@ -27,7 +27,6 @@ export class QuestionaryService {
     const questionsSeed = initialData.questions;
 
     for (const q of questionsSeed) {
-      console.log(q.question_text);
       const question = new QuestionEntity();
       question.question_text = q.question_text;
 

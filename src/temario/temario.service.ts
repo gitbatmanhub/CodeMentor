@@ -36,6 +36,7 @@ export class TemarioService {
         tema.duracionHoras = temaItem.duracionHoras;
         tema.instructores = temaItem.instructores;
         tema.nivelDificultad = temaItem.nivelDificultad;
+        tema.isTest = temaItem.isTest;
         return tema;
       });
 

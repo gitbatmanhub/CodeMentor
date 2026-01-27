@@ -12,6 +12,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from './interfaces';
 import { initialData } from '../seed/data/seed';
+import { QuestionEntity } from '../questionary/entities/question.entity';
 
 @Injectable()
 export class AuthService {
@@ -35,6 +36,24 @@ export class AuthService {
     } catch (error) {
       this.handleDbError(error);
     }
+  }
+
+  async deleteAll() {
+    const queryBuilder = this.userRepository.createQueryBuilder('users');
+    try {
+      return await queryBuilder.delete().where({}).execute();
+    } catch (e) {
+      return this.handlerDbException(e);
+    }
+  }
+
+  private handlerDbException(error: any) {
+    if (error.code === '23505') {
+      console.error(`Error: ${error.message}`);
+      throw new InternalServerErrorException(error.detail);
+    }
+    console.error(`Error: ${error.message}`);
+    throw new InternalServerErrorException(error.message);
   }
 
   async loginUser(loginUserDto: LoginUserDto) {
@@ -91,8 +110,8 @@ export class AuthService {
   }
 
   async plainResponseUser(user: User, token: string) {
-    const { email, fullName, encuesta } = user;
-    return new ResponseAuthDto(fullName, email, token, encuesta);
+    const { email, fullName, encuesta, id } = user;
+    return new ResponseAuthDto(fullName, email, token, encuesta, id);
   }
 
   private handleDbError(error: any): never {

@@ -1,4 +1,5 @@
 import * as bcrypt from 'bcrypt';
+import * as trace_events from 'node:trace_events';
 
 type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
@@ -22,6 +23,7 @@ export interface OptionItem {
   option_text: string;
   score: number;
   profile_hint: string;
+  // isTest: boolean;
 }
 interface SeedUser {
   email: string;
@@ -35,6 +37,7 @@ interface temas {
   duracionHoras: number;
   instructores: string;
   nivelDificultad: 'Básico' | 'Intermedio' | 'Avanzado';
+  isTest: boolean;
 }
 
 interface Unidades {
@@ -370,36 +373,42 @@ export const initialData: SeedData = {
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Básico',
+          isTest: false,
         },
         {
           descripcion: 'Tipo Object',
           duracionHoras: 0.5,
           instructores: 'ia',
           nivelDificultad: 'Básico',
+          isTest: false,
         },
         {
           descripcion: 'Arrays',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Básico',
+          isTest: false,
         },
         {
           descripcion: 'Tuplas',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Tipo Any y Enums',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Union y Literal Types',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
       ],
     },
@@ -413,30 +422,28 @@ export const initialData: SeedData = {
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Básico',
+          isTest: false,
         },
         {
           descripcion: 'Switch',
           duracionHoras: 0.5,
           instructores: 'ia',
           nivelDificultad: 'Básico',
+          isTest: false,
         },
         {
           descripcion: 'Bucle for',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Bucle while y do while',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
-        },
-        {
-          descripcion: 'Ejercicio práctico de ciclos',
-          duracionHoras: 1.5,
-          instructores: 'ia',
-          nivelDificultad: 'Intermedio',
+          isTest: false,
         },
       ],
     },
@@ -450,24 +457,28 @@ export const initialData: SeedData = {
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Funciones que retornan error (tipo never)',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
+          isTest: false,
         },
         {
           descripcion: 'Funciones como tipos',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Funciones callback',
           duracionHoras: 2,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
+          isTest: false,
         },
       ],
     },
@@ -481,24 +492,21 @@ export const initialData: SeedData = {
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Interfaces',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Types e interfaces',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
-        },
-        {
-          descripcion: 'Ejercicio práctico de clases e interfaces',
-          duracionHoras: 2,
-          instructores: 'ia',
-          nivelDificultad: 'Avanzado',
+          isTest: false,
         },
       ],
     },
@@ -512,18 +520,21 @@ export const initialData: SeedData = {
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Modificadores private y public',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Propiedad readonly',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
       ],
     },
@@ -537,30 +548,28 @@ export const initialData: SeedData = {
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Sobrescritura de métodos',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
+          isTest: false,
         },
         {
           descripcion: 'Palabra reservada protected',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Getters y setters',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
-        },
-        {
-          descripcion: 'Ejemplo completo de herencia',
-          duracionHoras: 1.5,
-          instructores: 'ia',
-          nivelDificultad: 'Avanzado',
+          isTest: false,
         },
       ],
     },
@@ -574,24 +583,21 @@ export const initialData: SeedData = {
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
+          isTest: false,
         },
         {
           descripcion: 'Métodos estáticos',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Interfaces y clases abstractas',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
-        },
-        {
-          descripcion: 'Ejemplos teóricos y prácticos',
-          duracionHoras: 2,
-          instructores: 'ia',
-          nivelDificultad: 'Intermedio',
+          isTest: false,
         },
       ],
     },
@@ -605,24 +611,21 @@ export const initialData: SeedData = {
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Tipos de errores',
           duracionHoras: 1,
           instructores: 'ia',
           nivelDificultad: 'Intermedio',
+          isTest: false,
         },
         {
           descripcion: 'Enlazar y depurar TypeScript',
           duracionHoras: 1.5,
           instructores: 'ia',
           nivelDificultad: 'Avanzado',
-        },
-        {
-          descripcion: 'Ejemplo práctico de manejo de errores',
-          duracionHoras: 1,
-          instructores: 'ia',
-          nivelDificultad: 'Intermedio',
+          isTest: false,
         },
       ],
     },

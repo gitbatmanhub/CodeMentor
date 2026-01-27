@@ -29,6 +29,7 @@ export class SeedService {
   }
 
   private async deleteAllTables() {
+    await this.authService.deleteAll();
     await this.questionaryService.deleteAll();
     await this.temarioService.deleteAll();
   }

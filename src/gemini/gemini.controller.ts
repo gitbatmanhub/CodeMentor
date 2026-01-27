@@ -14,8 +14,6 @@ export class GeminiController {
     @Body() body: MessageDto,
     @GetUserREST() user: User,
   ): Promise<responseInterface> {
-    console.log(body);
-
     return await this.tutorService.responder(body, user);
   }
 

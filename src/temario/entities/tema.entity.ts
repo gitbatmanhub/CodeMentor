@@ -27,6 +27,9 @@ export class TemaEntity {
   @Column()
   nivelDificultad: string;
 
+  @Column({ default: false })
+  isTest: boolean;
+
   @ManyToOne(() => UnidadEntity, (unidad) => unidad.temas, {
     onDelete: 'CASCADE',
     eager: true,

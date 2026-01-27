@@ -14,15 +14,20 @@ export class ResponseAuthDto {
   @Field()
   encuesta: boolean;
 
+  @Field()
+  id: string;
+
   constructor(
     fullName: string,
     email: string,
     token: string,
     encuesta: boolean,
+    id: string,
   ) {
     this.fullName = fullName;
     this.email = email;
     this.token = token;
     this.encuesta = encuesta;
+    this.id = id;
   }
 }
