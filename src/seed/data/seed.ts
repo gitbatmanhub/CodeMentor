@@ -9,8 +9,15 @@ interface SeedData {
 
   questions: QuestionItem[];
   unidades: Unidades[];
+  projects: Projectos[];
 
   // products: SeedProduct[];
+}
+
+export interface Projectos {
+  nombre: string;
+  descripcion: string;
+  dificultad: string;
 }
 
 export interface QuestionItem {
@@ -47,6 +54,36 @@ interface Unidades {
 }
 
 export const initialData: SeedData = {
+  projects: [
+    {
+      nombre: 'Calculadora de Propinas',
+      descripcion:
+        'Aplicación para practicar tipos primitivos y funciones simples.',
+      dificultad: 'Novato',
+    },
+    {
+      nombre: 'Lista de Tareas (To-Do)',
+      descripcion: 'Gestor de tareas con interfaces y arreglos tipados.',
+      dificultad: 'Principiante',
+    },
+    {
+      nombre: 'Buscador de Clima',
+      descripcion:
+        'Consumo de APIs externas y manejo de respuestas asíncronas.',
+      dificultad: 'Intermedio',
+    },
+    {
+      nombre: 'Gestor de Inventario',
+      descripcion: 'Uso de genéricos y tipos complejos para productos.',
+      dificultad: 'Avanzado',
+    },
+    {
+      nombre: 'E-commerce (Simulado)',
+      descripcion:
+        'Arquitectura completa con tipado estricto y estados globales.',
+      dificultad: 'Pro',
+    },
+  ],
   users: [
     {
       email: 'admin@google.com',

@@ -10,6 +10,7 @@ import { AuthModule } from '../auth/auth.module';
 import { TemarioModule } from '../temario/temario.module';
 import { TemarioService } from '../temario/temario.service';
 import { TutorService } from './tutor.service';
+import { ProjectsModule } from '../projects/projects.module';
 
 @Module({
   controllers: [GeminiController],
@@ -19,6 +20,7 @@ import { TutorService } from './tutor.service';
     ConversationModule,
     ProfileModule,
     TemarioModule,
+    ProjectsModule,
   ],
   providers: [GeminiService, LiccyHuman, GeminiProfileService, TutorService],
   exports: [GeminiService, GeminiProfileService, MongodbModule],

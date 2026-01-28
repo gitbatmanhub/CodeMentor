@@ -34,6 +34,19 @@ export class ConversationController {
     return this.conversationService.findOneConversationMain(idTema, idUsuario);
   }
 
+  @Get('user-mode')
+  findOneByTema(
+    @Query('idUsuario') idUsuario: string,
+    @Query('mode') mode: string,
+    @Query('idTemaConversacion') idTemaConversacion: string,
+  ) {
+    return this.conversationService.findOneConversationMainByMode(
+      idUsuario,
+      mode,
+      idTemaConversacion,
+    );
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

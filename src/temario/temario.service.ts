@@ -45,6 +45,14 @@ export class TemarioService {
   }
 
   async deleteAll() {
+    const queryBuilder = this.temaRepository.createQueryBuilder('temario');
+    try {
+      return await queryBuilder.delete().where({}).execute();
+    } catch (e) {
+      return this.handlerDbException(e);
+    }
+  }
+  async deleteAllUnidades() {
     const queryBuilder = this.unidadRepository.createQueryBuilder('unidad');
     try {
       return await queryBuilder.delete().where({}).execute();

@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { QuestionaryModule } from '../questionary/questionary.module';
 import { TemarioModule } from '../temario/temario.module';
+import { ProjectsModule } from '../projects/projects.module';
 
 @Module({
   controllers: [SeedController],
@@ -16,6 +17,7 @@ import { TemarioModule } from '../temario/temario.module';
     PassportModule,
     QuestionaryModule,
     TemarioModule,
+    ProjectsModule,
   ],
 })
 export class SeedModule {}

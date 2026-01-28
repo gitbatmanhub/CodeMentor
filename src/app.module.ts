@@ -11,6 +11,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { QuestionaryModule } from './questionary/questionary.module';
 import { TemarioModule } from './temario/temario.module';
 import { ProfileModule } from './profile/profile.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ProfileModule } from './profile/profile.module';
     QuestionaryModule,
     TemarioModule,
     ProfileModule,
+    ProjectsModule,
     // AuthModule,
     // MessagesWsModule,
   ],

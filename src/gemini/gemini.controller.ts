@@ -14,7 +14,24 @@ export class GeminiController {
     @Body() body: MessageDto,
     @GetUserREST() user: User,
   ): Promise<responseInterface> {
+    console.log(body);
     return await this.tutorService.responder(body, user);
+  }
+
+  @Post('chatFree')
+  async chatFree(
+    @Body() body: MessageDto,
+    @GetUserREST() user: User,
+  ): Promise<responseInterface> {
+    return await this.tutorService.responderFree(body, user);
+  }
+
+  @Post('chatProject')
+  async chatProject(
+    @Body() body: MessageDto,
+    @GetUserREST() user: User,
+  ): Promise<responseInterface> {
+    return await this.tutorService.responderProject(body, user);
   }
 
   /*@Get()

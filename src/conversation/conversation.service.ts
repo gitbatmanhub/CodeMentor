@@ -121,10 +121,12 @@ export class ConversationService {
     idTemaConversacion: string,
     idUsuario: string,
   ): Promise<ConversationMainInterface> {
-    const conversation = this.conversationMainModel.findOne({
-      idTemaConversacion: idTemaConversacion,
+    const filter: any = {
+      idTemaConversacion,
       userId: idUsuario,
-    });
+    };
+
+    const conversation = this.conversationMainModel.findOne(filter);
 
     const tema = await this.temarioService.findTemaById(idTemaConversacion);
     if (!conversation) {
@@ -132,6 +134,27 @@ export class ConversationService {
         `Conversation with id ${idTemaConversacion} not found`,
       );
     }
+    return conversation;
+  }
+
+  async findOneConversationMainByMode(
+    idUsuario: string,
+    mode?: string,
+    idTemaConversacion?: string,
+  ): Promise<ConversationMainInterface> {
+    console.log(idUsuario);
+    console.log(mode);
+    console.log(idTemaConversacion);
+    const filter: any = {
+      userId: idUsuario,
+      mode: mode,
+    };
+
+    if (idTemaConversacion) {
+      filter.idTemaConversacion = idTemaConversacion;
+    }
+    const conversation = this.conversationMainModel.findOne(filter);
+
     return conversation;
   }
 

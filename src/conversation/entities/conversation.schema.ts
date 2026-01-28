@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 export enum ConversationType {
   Tutor = 'Tutor',
   Libre = 'Libre',
+  Proyecto = 'Proyecto',
 }
 
 export const ConversationSchema = new mongoose.Schema({
