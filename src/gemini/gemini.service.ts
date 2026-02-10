@@ -19,4 +19,18 @@ export class GeminiService {
       history,
     });
   }
+
+  createTest(systemInstruction: string) {
+    return this.ai.chats.create({
+      model: this.MODEL,
+      config: { systemInstruction },
+    });
+  }
+
+  evaluateTest(systemInstruction: string) {
+    return this.ai.chats.create({
+      model: this.MODEL,
+      config: { systemInstruction },
+    });
+  }
 }

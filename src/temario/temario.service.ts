@@ -8,6 +8,8 @@ import { UnidadEntity } from './entities/unidad.entity';
 import { TemaEntity } from './entities/tema.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UnidadUsuarioEntity } from './entities/unidad-usuario.entity';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class TemarioService {
@@ -16,6 +18,10 @@ export class TemarioService {
     private readonly unidadRepository: Repository<UnidadEntity>,
     @InjectRepository(TemaEntity)
     private readonly temaRepository: Repository<TemaEntity>,
+    @InjectRepository(UnidadUsuarioEntity)
+    private readonly unidadUsuarioEntityRepository: Repository<UnidadUsuarioEntity>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   create(createTemarioDto: CreateTemarioDto) {
@@ -107,8 +113,15 @@ export class TemarioService {
     return unidades;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} temario`;
+  async findOneUnidad(id: string) {
+    const unidad = await this.unidadRepository.findOne({
+      where: { idUnidad: id },
+    });
+
+    if (!unidad) {
+      throw new InternalServerErrorException(`Unidad with id ${id} not found`);
+    }
+    return unidad;
   }
 
   update(id: number, updateTemarioDto: UpdateTemarioDto) {
@@ -123,6 +136,57 @@ export class TemarioService {
     return await this.temaRepository.findOne({
       where: { idTema: id },
     });
+  }
+
+  async setNotaUnidad(idUnidad: string, nota: number, idUser: string) {
+    const unidad = await this.findOneUnidad(idUnidad);
+
+    const user = await this.userRepository.findOne({
+      where: { id: idUser },
+    });
+
+    if (!user) {
+      throw new InternalServerErrorException(
+        `User with id ${idUser} not found`,
+      );
+    }
+
+    const validateNotaUnidad = await this.unidadUsuarioEntityRepository.findOne(
+      {
+        where: { idUnidad: unidad, idUsuario: user },
+      },
+    );
+
+    let unidadSet: UnidadUsuarioEntity;
+
+    if (!validateNotaUnidad) {
+      unidadSet = await this.setNoteInUnidadUsuario(unidad, user, 7);
+    } else {
+      unidadSet = await this.updateNoteInUnidadUsuario(validateNotaUnidad, 8);
+    }
+
+    return unidadSet;
+  }
+
+  async setNoteInUnidadUsuario(unidad: UnidadEntity, user: User, nota: number) {
+    const unidadUsuario = new UnidadUsuarioEntity();
+    unidadUsuario.idUnidad = unidad;
+    unidadUsuario.idUsuario = user;
+    unidadUsuario.nota = nota;
+
+    const unidadSave =
+      await this.unidadUsuarioEntityRepository.save(unidadUsuario);
+    return unidadSave;
+  }
+
+  async updateNoteInUnidadUsuario(
+    unidadUsuario: UnidadUsuarioEntity,
+    nota: number,
+  ) {
+    unidadUsuario.nota = nota;
+    await this.unidadUsuarioEntityRepository.save(unidadUsuario);
+
+    return unidadUsuario;
   }
 
   async findUnidadById(id: string) {

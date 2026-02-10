@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -11,15 +10,12 @@ import {
 import { ConversationService } from './conversation.service';
 // import { CreateConversationDto } from './dto/create-conversation.dto';
 import { UpdateConversationDto } from './dto/update-conversation.dto';
+import { Auth } from '../auth/decorators';
 
+@Auth()
 @Controller('conversation')
 export class ConversationController {
   constructor(private readonly conversationService: ConversationService) {}
-
-  @Get()
-  findAll() {
-    return this.conversationService.findAll();
-  }
 
   @Get('main')
   findAllConversation() {
@@ -54,11 +50,6 @@ export class ConversationController {
   ) {
     return this.conversationService.update(+id, updateConversationDto);
   }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.conversationService.remove(+id);
-  // }
 
   @Delete()
   removeAll(): string {

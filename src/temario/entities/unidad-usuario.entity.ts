@@ -28,5 +28,5 @@ export class UnidadUsuarioEntity {
   unidadUsuario: UnidadUsuarioEntity;
 
   @Column('int')
-  avance: number;
+  nota: number;
 }
