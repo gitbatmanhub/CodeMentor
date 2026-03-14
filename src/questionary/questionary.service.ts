@@ -91,11 +91,17 @@ export class QuestionaryService {
     console.error(`Error: ${error.message}`);
     throw new InternalServerErrorException(error.message);
   }
-
   async findAll(): Promise<QuestionEntity[]> {
-    return await this.questionRepository.find({
+    const preguntas = await this.questionRepository.find({
       relations: ['options'],
+      order: {
+        options: {
+          score: 'ASC',
+        },
+      },
     });
+
+    return preguntas;
   }
 
   findOne(id: number) {
