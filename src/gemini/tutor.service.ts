@@ -285,6 +285,7 @@ Usa un tono empático y motivador. Si la nota es 1 o 2, recomiéndale usar el 'T
       ? await this.conversationService.findOneConversationMainByMode(
           body.userId,
           body.mode,
+          body.idTemaConversacion,
         )
       : await this.conversationService.createConversationMain(
           new CreateConversationMainDto(
