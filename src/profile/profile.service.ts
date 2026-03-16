@@ -17,10 +17,23 @@ export class ProfileService {
   ) {}
 
   async createProfile(userId: string, data: ProfileUserDto) {
-    const document = await this.profileModel.create({
-      userId,
-      ...data,
-    });
+    const document = await this.profileModel.findOneAndUpdate(
+      { userId },
+      {
+        $set: {
+          ...data,
+          updatedAt: new Date(),
+        },
+        $setOnInsert: {
+          userId,
+          createdAt: new Date(),
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+      },
+    );
 
     if (!document) {
       await this.authService.updateEncuestaStatus(userId, false);
