@@ -126,7 +126,9 @@ export class ConversationService {
       userId: idUsuario,
     };
 
-    const conversation = this.conversationMainModel.findOne(filter);
+    const conversation = await this.conversationMainModel
+      .findOne(filter)
+      .exec();
 
     const tema = await this.temarioService.findTemaById(idTemaConversacion);
     if (!conversation) {
@@ -142,9 +144,6 @@ export class ConversationService {
     mode?: string,
     idTemaConversacion?: string,
   ): Promise<ConversationMainInterface> {
-    console.log(idUsuario);
-    console.log(mode);
-    console.log(idTemaConversacion);
     const filter: any = {
       userId: idUsuario,
       mode: mode,
